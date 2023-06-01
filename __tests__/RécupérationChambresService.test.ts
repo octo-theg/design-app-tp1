@@ -57,7 +57,41 @@ describe('RécupérationChambresService', () => {
     })
   });
   describe("modifier prix de base", () => {
-    it("appelle ChambreRepository.actualise avec la liste des chambres avec le prix mis à jour", () => {
+    it("appelle ChambreRepository.actualise avec une liste de une chambre avec le prix mis à jour", () => {
+      // GIVEN
+      const nouveauPrixDeBase = 30;
+
+      const chambres = [
+        {
+          étage: 1,
+          prix: 50,
+          numéro: '1',
+        }
+      ];
+
+      const chambresActualisées = [
+        {
+          étage: 1,
+          prix: nouveauPrixDeBase*1.07,
+          numéro: '1',
+        }
+      ];
+
+
+      const chambresRepository: ChambresRepository = {
+        actualiserChambres: jest.fn(),
+        récupérer: () => chambres
+      }
+      const récupérationChambresService = new RécupérationChambresService(chambresRepository);
+
+      // WHEN
+      récupérationChambresService.modifierPrixDeBase(30);
+
+      // THEN
+      expect(chambresRepository.actualiserChambres).toHaveBeenCalledWith(chambresActualisées);
+    })
+
+    it("appelle ChambreRepository.actualise avec une liste des chambres avec le prix mis à jour", () => {
       // GIVEN
       const nouveauPrixDeBase = 30;
 

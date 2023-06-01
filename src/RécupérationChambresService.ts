@@ -12,6 +12,20 @@ export default class RécupérationChambresService {
   }
 
   modifierPrixDeBase(prixDeBase: number) {
+    const chambres = this.chambresRepository.récupérer();
+    const MULTIPLICATEUR_PRIX = {
+      0: 1,
+      1: 1.07,
+      2: 1.22,
+      3: 1.33,
+    };
+    this.chambresRepository.actualiserChambres(chambres.map(({étage, prix, numéro}) => (
+      {
+        étage,
+        prix: prixDeBase * MULTIPLICATEUR_PRIX[étage],
+        numéro,
+      }
+    )))
     this.chambresRepository.actualiserChambres([
       {
         étage: 0,
