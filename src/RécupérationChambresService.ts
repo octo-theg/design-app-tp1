@@ -1,15 +1,13 @@
-export default class RécupérationChambresService {
-  constructor() {
+import ChambresRepository from './ChambresRepository'
 
+export default class RécupérationChambresService {
+  private chambresRepository;
+  
+  constructor(chambresRepository: ChambresRepository) {
+    this.chambresRepository = chambresRepository;
   }
 
   récupérer() {
-    return [
-      {
-        étage: 0,
-        numéro: '1',
-        prix: 50,
-      }
-    ];
+    return this.chambresRepository.récupérer();
   }
 }
