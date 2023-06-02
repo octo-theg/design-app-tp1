@@ -14,7 +14,7 @@ export default class Chambre {
     this.number = number
   }
   actualiserPrix(nouveauPrix: number) {
-    this.prix = nouveauPrix
+    this.prix = nouveauPrix * Chambre.MULTIPLICATEUR_PRIX[this.etage]
   };
 
   //des getters mais flemme

@@ -1,154 +1,46 @@
 import ChambresRepository from '../src/interfaces-adapters/ChambresRepository'
 import Chambre from "../src/entities/Chambre";
+import récupérerChambres from "../src/use-cases/RécupérerChambres"
 
-describe('RécupérationChambresService', () => {
+describe('RécupérerChambres', () => {
   describe("si l'hôtel ne possède qu'une seule chambre", () => {
     it("renvoie cette chambre", () => {
       // GIVEN
-      const chambres = [
+      const listeUneChambre = [
         new Chambre(0, 50, '1')
       ];
 
       const chambresRepository: ChambresRepository = {
-        getAll: () => chambres,
-        actualiserChambres: jest.fn()
+        getAll: () => listeUneChambre,
+        updateAll: jest.fn()
       }
-      const récupérationChambresService = new ChambresService(chambresRepository);
 
       // WHEN
-      const liste = récupérationChambresService.récupérer();
+      const chambres = récupérerChambres(chambresRepository);
 
       // THEN
-      expect(liste).toEqual(chambres);
+      expect(chambres).toEqual(listeUneChambre);
     });
   });
 
   describe("si l'hôtel possède plusieurs chambres", () => {
     it("renvoie toutes ces chambres", () => {
       // GIVEN
-      const chambres = [
-        {
-          étage: 0,
-          prix: 50,
-          numéro: '1',
-        },
-        {
-          étage: 0,
-          prix: 50,
-          numéro: '2',
-        }
+      const listePlusieursChambres = [
+        new Chambre( 0,  50,  '1',),
+        new Chambre( 0,  50,  '2',)
       ];
 
       const chambresRepository: ChambresRepository = {
-        getAll: () => chambres,
-        actualiserChambres: jest.fn()
+        getAll: () => listePlusieursChambres,
+        updateAll: jest.fn()
       }
-      const récupérationChambresService = new ChambresService(chambresRepository);
 
       // WHEN
-      const liste = récupérationChambresService.récupérer();
+      const chambres = récupérerChambres(chambresRepository);
 
       // THEN
-      expect(liste).toEqual(chambres);
-    })
-  });
-  describe("modifier prix de base", () => {
-    it("appelle ChambreRepository.actualise avec une liste de une chambre avec le prix mis à jour", () => {
-      // GIVEN
-      const nouveauPrixDeBase = 30;
-
-      const chambres = [
-        {
-          étage: 1,
-          prix: 50,
-          numéro: '1',
-        }
-      ];
-
-      const chambresActualisées = [
-        {
-          étage: 1,
-          prix: nouveauPrixDeBase*1.07,
-          numéro: '1',
-        }
-      ];
-
-
-      const chambresRepository: ChambresRepository = {
-        actualiserChambres: jest.fn(),
-        getAll: () => chambres
-      }
-      const récupérationChambresService = new ChambresService(chambresRepository);
-
-      // WHEN
-      récupérationChambresService.modifierPrixDeBase(30);
-
-      // THEN
-      expect(chambresRepository.actualiserChambres).toHaveBeenCalledWith(chambresActualisées);
-    })
-
-    it("appelle ChambreRepository.actualise avec une liste des chambres avec le prix mis à jour", () => {
-      // GIVEN
-      const nouveauPrixDeBase = 30;
-
-      const chambres = [
-        {
-          étage: 0,
-          prix: 50,
-          numéro: '1',
-        },
-        {
-          étage: 1,
-          prix: 60,
-          numéro: '2',
-        },
-        {
-          étage: 2,
-          prix: 70,
-          numéro: '1',
-        },
-        {
-          étage: 3,
-          prix: 80,
-          numéro: '2',
-        }
-      ];
-
-      const chambresActualisées = [
-        {
-          étage: 0,
-          prix: nouveauPrixDeBase,
-          numéro: '1',
-        },
-        {
-          étage: 1,
-          prix: nouveauPrixDeBase*1.07,
-          numéro: '2',
-        },
-        {
-          étage: 2,
-          prix: nouveauPrixDeBase*1.22,
-          numéro: '1',
-        },
-        {
-          étage: 3,
-          prix: nouveauPrixDeBase*1.33,
-          numéro: '2',
-        }
-      ];
-
-
-      const chambresRepository: ChambresRepository = {
-        actualiserChambres: jest.fn(),
-        getAll: () => chambres
-      }
-      const récupérationChambresService = new ChambresService(chambresRepository);
-
-      // WHEN
-      récupérationChambresService.modifierPrixDeBase(30);
-
-      // THEN
-      expect(chambresRepository.actualiserChambres).toHaveBeenCalledWith(chambresActualisées);
+      expect(chambres).toEqual(listePlusieursChambres);
     })
   });
 });
