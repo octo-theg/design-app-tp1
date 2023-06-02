@@ -1,20 +1,16 @@
 import ChambresRepository from '../src/interfaces-adapters/ChambresRepository'
-import ChambresService from '../src/use-cases/ChambresService'
+import Chambre from "../src/entities/Chambre";
 
 describe('RécupérationChambresService', () => {
   describe("si l'hôtel ne possède qu'une seule chambre", () => {
     it("renvoie cette chambre", () => {
       // GIVEN
       const chambres = [
-        {
-          étage: 0,
-          numéro: '1',
-          prix: 50,
-        }
+        new Chambre(0, 50, '1')
       ];
 
       const chambresRepository: ChambresRepository = {
-        récupérer: () => chambres,
+        getAll: () => chambres,
         actualiserChambres: jest.fn()
       }
       const récupérationChambresService = new ChambresService(chambresRepository);
@@ -44,7 +40,7 @@ describe('RécupérationChambresService', () => {
       ];
 
       const chambresRepository: ChambresRepository = {
-        récupérer: () => chambres,
+        getAll: () => chambres,
         actualiserChambres: jest.fn()
       }
       const récupérationChambresService = new ChambresService(chambresRepository);
@@ -80,7 +76,7 @@ describe('RécupérationChambresService', () => {
 
       const chambresRepository: ChambresRepository = {
         actualiserChambres: jest.fn(),
-        récupérer: () => chambres
+        getAll: () => chambres
       }
       const récupérationChambresService = new ChambresService(chambresRepository);
 
@@ -144,7 +140,7 @@ describe('RécupérationChambresService', () => {
 
       const chambresRepository: ChambresRepository = {
         actualiserChambres: jest.fn(),
-        récupérer: () => chambres
+        getAll: () => chambres
       }
       const récupérationChambresService = new ChambresService(chambresRepository);
 

@@ -1,4 +1,6 @@
+import Chambre from "../entities/Chambre";
+
 export default interface ChambresRepository {
-  récupérer()
-  actualiserChambres(chambres: any[])
+  getAll(): Chambre[]
+  updateAll(chambres: Chambre[])
 }
