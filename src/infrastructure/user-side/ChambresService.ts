@@ -1,6 +1,6 @@
-import ChambresRepository from './ChambresRepository'
+import ChambresRepository from '../server-side/ChambresRepository'
 
-export default class RécupérationChambresService {
+export default class ChambresService {
   private chambresRepository;
   
   constructor(chambresRepository: ChambresRepository) {
@@ -26,27 +26,5 @@ export default class RécupérationChambresService {
         numéro,
       }
     )))
-    this.chambresRepository.actualiserChambres([
-      {
-        étage: 0,
-        prix: prixDeBase,
-        numéro: '1',
-      },
-      {
-        étage: 1,
-        prix: prixDeBase*1.07,
-        numéro: '2',
-      },
-      {
-        étage: 2,
-        prix: prixDeBase*1.22,
-        numéro: '1',
-      },
-      {
-        étage: 3,
-        prix: prixDeBase*1.33,
-        numéro: '2',
-      }
-    ])
   }
 }

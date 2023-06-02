@@ -1,5 +1,5 @@
-import ChambresRepository from '../src/ChambresRepository'
-import RécupérationChambresService from '../src/RécupérationChambresService'
+import ChambresRepository from '../src/infrastructure/server-side/ChambresRepository'
+import ChambresService from '../src/infrastructure/user-side/ChambresService'
 
 describe('RécupérationChambresService', () => {
   describe("si l'hôtel ne possède qu'une seule chambre", () => {
@@ -17,7 +17,7 @@ describe('RécupérationChambresService', () => {
         récupérer: () => chambres,
         actualiserChambres: jest.fn()
       }
-      const récupérationChambresService = new RécupérationChambresService(chambresRepository);
+      const récupérationChambresService = new ChambresService(chambresRepository);
 
       // WHEN
       const liste = récupérationChambresService.récupérer();
@@ -47,7 +47,7 @@ describe('RécupérationChambresService', () => {
         récupérer: () => chambres,
         actualiserChambres: jest.fn()
       }
-      const récupérationChambresService = new RécupérationChambresService(chambresRepository);
+      const récupérationChambresService = new ChambresService(chambresRepository);
 
       // WHEN
       const liste = récupérationChambresService.récupérer();
@@ -82,7 +82,7 @@ describe('RécupérationChambresService', () => {
         actualiserChambres: jest.fn(),
         récupérer: () => chambres
       }
-      const récupérationChambresService = new RécupérationChambresService(chambresRepository);
+      const récupérationChambresService = new ChambresService(chambresRepository);
 
       // WHEN
       récupérationChambresService.modifierPrixDeBase(30);
@@ -146,7 +146,7 @@ describe('RécupérationChambresService', () => {
         actualiserChambres: jest.fn(),
         récupérer: () => chambres
       }
-      const récupérationChambresService = new RécupérationChambresService(chambresRepository);
+      const récupérationChambresService = new ChambresService(chambresRepository);
 
       // WHEN
       récupérationChambresService.modifierPrixDeBase(30);
