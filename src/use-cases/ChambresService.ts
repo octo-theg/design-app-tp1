@@ -1,8 +1,8 @@
-import ChambresRepository from '../server-side/ChambresRepository'
+import ChambresRepository from '../interfaces-adapters/ChambresRepository'
 
 export default class ChambresService {
   private chambresRepository;
-  
+
   constructor(chambresRepository: ChambresRepository) {
     this.chambresRepository = chambresRepository;
   }

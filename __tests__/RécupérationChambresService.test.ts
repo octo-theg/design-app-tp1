@@ -1,5 +1,5 @@
-import ChambresRepository from '../src/infrastructure/server-side/ChambresRepository'
-import ChambresService from '../src/infrastructure/user-side/ChambresService'
+import ChambresRepository from '../src/interfaces-adapters/ChambresRepository'
+import ChambresService from '../src/use-cases/ChambresService'
 
 describe('RécupérationChambresService', () => {
   describe("si l'hôtel ne possède qu'une seule chambre", () => {
@@ -21,7 +21,7 @@ describe('RécupérationChambresService', () => {
 
       // WHEN
       const liste = récupérationChambresService.récupérer();
-      
+
       // THEN
       expect(liste).toEqual(chambres);
     });

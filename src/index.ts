@@ -1,4 +1,4 @@
-import sub from './infrastructure/user-side/ChambresService'
+import sub from 'src/use-cases/ChambresService'
 
 export const greet = (name: string): string => `Hello, ${sub.exaggerate(name, 8)}`
 
